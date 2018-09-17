@@ -18,9 +18,9 @@ public class Client {
         try {
             WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 
-            String uri = "wss://echo.websocket.org:80/";
+//            String uri = "wss://echo.websocket.org:80/";
 //            String uri = "ws://pocketmsg.ru:8888/v1/auth/";
-//            String uri = "wss://pocketmsg.ru:8888/v1/ws/";
+            String uri = "wss://pocketmsg.ru:8888/v1/ws/";
 //            String uri = "wss://pocketmsg.ru/v1/ws";
 //            String uri = "ws://127.0.0.1:8080/WebSocketServer/endpoint";
 
