@@ -11,10 +11,10 @@ public class HTTPTest {
     public static void main(String[] args) {
 //        System.out.println(executePost("http://www.lib.ru:80","GET","/ HTTP/1.0\\r\\n\\r\\n"));
 
-//        String mess ="{ \"account_name\": \"username\", \"email\": \"email@email.com\",\"password\": \"password\" }";
-//        System.out.println(executePost("https://pocketmsg.ru:8888/v1/users","POST",mess));
+        String mess ="{ \"account_name\": \"username\", \"email\": \"email@email.com\",\"password\": \"password\" }";
+        System.out.println(executePost("https://pocketmsg.ru:8888/v1/users","POST",mess));
 
-        System.out.println(executePost("https://pocketmsg.ru","GET","/ HTTP/1.0\\r\\n\\r\\n"));
+//        System.out.println(executePost("https://pocketmsg.ru:8888","GET","/ HTTP/1.0\\r\\n\\r\\n"));
     }
 
     public static String executePost(String targetURL,String method, String urlParameters) {

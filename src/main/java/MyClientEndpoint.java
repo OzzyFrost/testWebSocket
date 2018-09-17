@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.websocket.ClientEndpoint;
@@ -8,16 +11,26 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 
 
-@ClientEndpoint
-public class MyClientEndpoint {
+@ClientEndpoint(configurator = MyClientEndpoint.Configurator.class)
+public class MyClientEndpoint{
+    public static class Configurator extends javax.websocket.ClientEndpointConfig.Configurator {
+        @Override
+        public void beforeRequest(Map<String,List<String>> headers)
+        {
+            List<String> values = new ArrayList<String>();
+            values.add("2d1ea610bc493d76");
+            headers.put("token", values);
+        }
+    }
+
+
     @OnOpen
     public void onOpen(Session session) {
         System.out.println("Connected to endpoint: " + session.getBasicRemote());
         try {
 //            String name = "ozzyk";
+            String name = "{ \"receiver\":\"2\", \"message\":\"helloworld\" }" ;
 
-
-            String name = " GET / HTTP/1.0\\r\\n\\r\\n";
             System.out.println("Sending message to endpoint: " + name);
             session.getBasicRemote().sendText(name);
         } catch (IOException ex) {
@@ -35,4 +48,5 @@ public class MyClientEndpoint {
     public void processError(Throwable t) {
         t.printStackTrace();
     }
+
 }
