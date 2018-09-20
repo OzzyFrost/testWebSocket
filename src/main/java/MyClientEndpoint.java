@@ -10,45 +10,55 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
-
+import javax.websocket.HandshakeResponse;
 
 
 @ClientEndpoint(configurator = MyClientEndpoint.Configurator.class)
-public class MyClientEndpoint{
+public class MyClientEndpoint {
 
 
     Session session1;
+
     public static class Configurator extends javax.websocket.ClientEndpointConfig.Configurator {
         @Override
-        public void beforeRequest(Map<String,List<String>> headers)
-        {
+        public void beforeRequest(Map<String, List<String>> headers) {
             List<String> values = new ArrayList<String>();
             values.add("f5b7c119e858b9f3");
             headers.put("token", values);
+//            List<String> values1 = new ArrayList<String>();
+//            values1.add("/v1/ws/");
+//            headers.put("GET", values1);
+
+
             super.beforeRequest(headers);
+            System.out.println("beforeRequest ......");
+            System.out.println(headers);
         }
+
+        @Override
+        public void afterResponse(HandshakeResponse hr) {
+            Map<String, List<String>> headers = hr.getHeaders();
+//            log.info("headers -> "+headers);
+            System.out.println("afterRequest ......");
+            System.out.println(headers);
+        }
+
     }
 
 
     @OnOpen
     public void onOpen(Session session) {
         System.out.println("Connected to endpoint: " + session.getBasicRemote());
+        System.out.println("id session " + session.getId());
         try {
 //            String name = "ozzyk";
-            String name = "{ \"receiver\":\"2\", \"message\":\"helloworld\" }" ;
+//            String name = "{ \"receiver\":\"2\", \"message\":\"helloworld\" }" ;
+            String name = "";
 
             System.out.println("Sending message to endpoint: " + name);
             session.getBasicRemote().sendText(name);
             session1 = session;
-//            for (int i = 0; i <1 ; i++) {}
-//                String mess = sc.nextLine();
-//                session.getBasicRemote().sendText(mess+" "+1);
-//            mess = sc.nextLine();
-//            session.getBasicRemote().sendText(mess+" "+2);
-//            mess = sc.nextLine();
-//            session.getBasicRemote().sendText(mess+" "+3);
-
-
+            System.out.println(session1.getRequestURI());
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -60,7 +70,6 @@ public class MyClientEndpoint{
     public void processMessage(String message) {
         System.out.println("Received message in client: " + message);
         Client.messageLatch.countDown();
-//        return "dfdf"+message;
     }
 
     @OnError
@@ -68,7 +77,7 @@ public class MyClientEndpoint{
         t.printStackTrace();
     }
 
-    public void sendMSG(String mess){
+    public void sendMSG(String mess) {
         try {
             session1.getBasicRemote().sendText(mess);
         } catch (IOException e) {
