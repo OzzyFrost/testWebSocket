@@ -26,7 +26,7 @@ public class SSLClientExample {
      *keytool -genkey -keyalg RSA -validity 3650 -keystore "keystore.jks" -storepass "storepassword" -keypass "keypassword" -alias "default" -dname "CN=127.0.0.1, OU=MyOrgUnit, O=MyOrg, L=MyCity, S=MyRegion, C=MyCountry"
      */
     public static void main(String[] args) throws Exception {
-        WebSocketChatClient chatclient = new WebSocketChatClient(new URI("wss://localhost:8887"));
+        WebSocketChatClient chatclient = new WebSocketChatClient(new URI("wss://pocketmsg.ru:8888/v1/ws/"));
 
         // load up the key store
 //        String STORETYPE = "JKS";
@@ -53,7 +53,9 @@ public class SSLClientExample {
 
         SSLSocketFactory factory = sslContext.getSocketFactory();// (SSLSocketFactory) SSLSocketFactory.getDefault();
 
-//        chatclient.setSocketFactory(factory);
+//        вот тут ошибка пишет нет такоо метода, в мавене проиасл что Вы написали, но не помогло
+//        в чем может быть моя ошибка?
+        chatclient.setSocketFactory(factory);
 
         chatclient.connectBlocking();
 
