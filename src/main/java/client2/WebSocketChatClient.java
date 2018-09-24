@@ -1,25 +1,28 @@
 package client2;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import javax.net.SocketFactory;
 import java.net.URI;
-import java.security.KeyStore;
+import java.util.Map;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManagerFactory;
+import java.net.URI;
 
-import org.java_websocket.WebSocketImpl;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
 class WebSocketChatClient extends WebSocketClient {
+    private SocketFactory socketFactory = null;
 
     public WebSocketChatClient( URI serverUri ) {
         super( serverUri );
+    }
+
+    public WebSocketChatClient(URI serverUri, Map<String, String> httpHeaders) {
+        super(serverUri, httpHeaders);
     }
 
     @Override
@@ -46,7 +49,9 @@ class WebSocketChatClient extends WebSocketClient {
         ex.printStackTrace();
 
     }
-
+    void setSocketFactory(SocketFactory socketFactory) {
+        this.socketFactory = socketFactory;
+    }
 }
 
 

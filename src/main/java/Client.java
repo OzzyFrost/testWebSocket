@@ -43,11 +43,8 @@ public class Client {
 
             System.out.println("Connecting to " + uri);
 //            ClientEndpointConfig config = ClientEndpointConfig.Builder.create().build();
-//            Map<String,List<String>> headers = new HashMap();
-//            headers.put("token", Arrays.asList("f5b7c119e858b9f3"));
-//            config.getConfigurator().beforeRequest(headers);
 
-            //            container.connectToServer(MyClientEndpoint.class , URI.create(uri));
+            // container.connectToServer(MyClientEndpoint.class , URI.create(uri));
             URI uri1= URI.create(uri);
 
 //            Session session= container.connectToServer(mce, uri1);

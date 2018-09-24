@@ -24,7 +24,7 @@ public class MyClientEndpoint {
         public void beforeRequest(Map<String, List<String>> headers) {
             List<String> values = new ArrayList<String>();
             values.add("f5b7c119e858b9f3");
-            headers.put("token", values);
+            headers.put("Token", values);
 //            List<String> values1 = new ArrayList<String>();
 //            values1.add("/v1/ws/");
 //            headers.put("GET", values1);
