@@ -205,19 +205,29 @@ public class HTTPSTest {
 //                "password": password
 //        }
 //        String url = "https://selfsolve.apple.com/wcResults.do";
-        String url = "https://pocketmsg.ru:8888/v1/auth/";
+//        String url = "https://pocketmsg.ru:8888/v1/auth/";
+        String url = "https://pocketmsg.ru:8888/v1/users/";
 
         URL obj = new URL(url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
         //add reuqest header
         con.setRequestMethod("PUT");
-//        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("Token", "3c4e0e034757a628");
 //        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
+//        запрос на авторизацию
+//        String urlParameters = "{" +
+//                "\"user\": \"OzzyFrost\"," +
+//                "\"password\": \"12345\"" +
+//                "}";
+//        формат запроса на добавление контакта
+//        header: token
+//        {
+//            "contact":e-mail
+//        }
         String urlParameters = "{" +
-                "\"user\": \"OzzyFrost\"," +
-                "\"password\": \"12345\"" +
+                "\"contact\": \"email@email.com\"" +
                 "}";
 
         // Send post request
